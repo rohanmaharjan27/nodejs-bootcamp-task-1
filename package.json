@@ -1,0 +1,19 @@
+{
+  "name": "library-management-system",
+  "version": "1.0.0",
+  "description": "Library Management System",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rohanmaharjan27/nodejs-bootcamp-task-1.git"
+  },
+  "author": "Rohan Maharjan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rohanmaharjan27/nodejs-bootcamp-task-1/issues"
+  },
+  "homepage": "https://github.com/rohanmaharjan27/nodejs-bootcamp-task-1#readme"
+}
