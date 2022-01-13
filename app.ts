@@ -2,7 +2,9 @@ import express from 'express';
 import chalk from 'chalk';
 
 import mongoose from 'mongoose';
-import BookModel, { Book } from './models/book';
+import bookRouter from './routes/bookRoutes';
+import { Request, Response } from 'express';
+import bodyParser from 'body-parser';
 
 require('dotenv').config();
 
@@ -28,28 +30,22 @@ mongoose
 // express app
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 // register view engine
 app.set('view engine', 'ejs');
-app.set('views', 'Views-EJS');
+app.set('views', 'views');
 
-// creating example get api to create a sample document for the database
-app.get('/book', (req, res) => {
-  const exampleBook: Book = {
-    name: 'The Silmarillion',
-    author: 'J.R.R. Tolkein',
-    image: 'https://pos.booksmandala.com/images/6656',
-  };
+// middleware and static files
+app.use(express.static('public'));
 
-  const book = new BookModel(exampleBook);
+// takes all the url encoded data and passes that into an object that we can use in the req object
+// middleware to accept formdata
+app.use(express.urlencoded({ extended: true }));
 
-  book
-    .save()
-    .then((result: any) => {
-      res.send(result);
-      console.log(chalk.green('Book added successfully!'));
-    })
-    .catch((err: any) => {
-      console.log(err);
-      console.log(chalk.green('Failed to add book!'));
-    });
+app.get('/', (req: Request, res: Response) => {
+  res.redirect('/books');
 });
+
+app.use('/books', bookRouter);
