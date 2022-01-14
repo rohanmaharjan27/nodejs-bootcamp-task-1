@@ -39,6 +39,8 @@ app.set('views', 'views');
 
 // middleware and static files
 app.use(express.static('public'));
+app.use('/images/books', express.static('images/books'));
+app.use('/images/users', express.static('images/users'));
 
 // takes all the url encoded data and passes that into an object that we can use in the req object
 // middleware to accept formdata

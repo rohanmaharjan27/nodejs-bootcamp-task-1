@@ -18,6 +18,13 @@ const bookForm: RequestHandler = (req, res) => {
 const bookCreate: RequestHandler = (req, res) => {
   const name = req.body.name;
 
+  const imageName = req.file?.path;
+
+  const finalObj = {
+    ...req.body,
+    image: imageName,
+  };
+
   BookModel.find({ name })
     .exec()
     .then((book) => {
@@ -26,8 +33,7 @@ const bookCreate: RequestHandler = (req, res) => {
           error_message: 'Book already exists!',
         });
       } else {
-        const book = new BookModel(req.body);
-
+        const book = new BookModel(finalObj);
         book
           .save()
           .then((result: any) => {

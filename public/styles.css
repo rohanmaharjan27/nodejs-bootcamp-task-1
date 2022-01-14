@@ -125,12 +125,44 @@ textarea {
 }
 
 .book_rent_btn {
-  border: 1px solid #73d13d;
-  background-color: #73d13d;
+  border: 1px solid #1890ff;
+  background-color: #1890ff;
   color: #fff;
-  width: 100px;
+  width: auto;
   height: 40px;
   border-radius: 4px;
   font-size: 16px;
   margin-top: 10px;
+}
+
+.book_update_btn {
+  border: 1px solid #237804;
+  background-color: #237804;
+  color: #fff;
+  width: auto;
+  height: 40px;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.book_delete_btn {
+  border: 1px solid #f5222d;
+  background-color: #f5222d;
+  color: #fff;
+  width: auto;
+  height: 40px;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.add_book_div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add_book_div label,input{
+  margin:10px 0px;
 }

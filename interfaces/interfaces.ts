@@ -2,13 +2,13 @@ export interface Book {
   name: string;
   author: string;
   image?: string;
+  slug: String;
 }
 
-export interface Rent {
+export interface Record {
   first_name: string;
   last_name: string;
   email: string;
-  image?: string;
   phone: string;
   rent_date: Date;
   return_date: Date;
