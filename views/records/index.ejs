@@ -1,0 +1,26 @@
+<html lang='en'>
+    <%- include('../partials/header.ejs') %>
+    <script>
+
+    </script>
+    <body>
+       <%- include('../partials/nav.ejs') %>
+       <h2 class="title"><%= title %></h2>
+       <div class="book_list">
+           <% if (records.length>0) {%>
+            <% records.map((record,idx)=>{ %>
+                <div class='book_card'>
+                        <h3 class="book_name"><%= record.first_name %> <%= record.last_name %></h3>
+                        <p class="book_author"><%= record.phone %></p>
+                        <p class="book_author"><%= record.return_date %></p>
+                        <p class="book_author"><%= record.return_date_max %></p>
+                </div>
+            <% }) %>
+            <% } else {%>
+                <h3 class="title">No records to display</h3>
+            <% } %>
+        </div>
+       </div>
+       <%- include('../partials/footer.ejs') %>
+    </body>
+</html>

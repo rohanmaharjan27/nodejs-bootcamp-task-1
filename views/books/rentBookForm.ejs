@@ -4,7 +4,7 @@
        <%- include('../partials/nav.ejs') %>
        <h2 class="title"><%= title %></h2>
        <div class="add_book_div">
-         <form method="post">
+         <form enctype="multipart/form-data" action='/records' method='post'>
             <label for="first_name">First Name:</label>
             <br/>
             <input type="text" id="first_name" name="first_name" required/>
@@ -16,6 +16,7 @@
             <label for="email">Email:</label>
             <br/>
             <input type="email" id="email" name="email" required/>
+            <br/>
             <label for="phone">Phone Number:</label>
             <br/>
             <input type="text" id="phone" name="phone" required/>
@@ -25,5 +26,49 @@
         </div>
        </div>
        <%- include('../partials/footer.ejs') %>
+
+       <script>
+        const createNewRecord = async(body) => {
+            const settings = {  
+                method:'POST', 
+                headers: {'Content-Type': 'application/json'},
+                body:JSON.stringify(body),
+            }; 
+
+            try{ 
+                const response = await fetch('http://localhost:4000/records', settings) 
+                const res = await response.json(); 
+                console.log(res); 
+                
+                if (res.error_message){
+                    alert(res.error_message)
+                }else{
+                    alert(res.message);
+                }
+            } catch(error) { 
+                console.log(error);
+        }};  
+
+        const rentBook=document.querySelector('button.book_rent_btn');
+        const form = document.querySelector('form');
+        const bookId = window.location.pathname.split('/')[3];
+
+        form.addEventListener('submit', (e) => {
+            const data = Object.fromEntries(new FormData(form).entries());
+
+            console.log('data',data);
+
+            e.preventDefault();
+
+            const body={
+                ...data,
+                rented_book:bookId,
+            }
+
+            createNewRecord(body);
+            
+        });
+        </script>
+
     </body>
 </html>

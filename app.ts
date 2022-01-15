@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import bookRouter from './routes/bookRoutes';
 import { Request, Response } from 'express';
 import bodyParser from 'body-parser';
+import recordRouter from './routes/recordRoutes';
 
 require('dotenv').config();
 
@@ -51,3 +52,9 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/books', bookRouter);
+app.use('/records', recordRouter);
+
+app.use((req, res) => {
+  // res.status(404).sendFile("./views/404.html", { root: __dirname });
+  res.status(404).render('404', { title: '404' });
+});

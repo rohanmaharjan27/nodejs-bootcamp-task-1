@@ -17,10 +17,18 @@
             <br/>
             <input type="file" id="image" name="image" required/>
             <br/>
-             <button type="submit" class="book_rent_btn">Add</button>
+            <button type="submit" class="book_rent_btn">Add</button>
          </form>
         </div>
        </div>
        <%- include('../partials/footer.ejs') %>
+
+       <script>
+        const addBook=document.querySelector('button.book_rent_btn');
+
+        addBook.addEventListener('click',(e)=>{
+            window.location.href='/books'
+        });                
+    </script>
     </body>
 </html>

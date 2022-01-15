@@ -29,15 +29,15 @@ const bookCreate: RequestHandler = (req, res) => {
     .exec()
     .then((book) => {
       if (book.length >= 1) {
-        res.status(201).json({
+        res.status(409).json({
           error_message: 'Book already exists!',
         });
       } else {
         const book = new BookModel(finalObj);
         book
           .save()
-          .then((result: any) => {
-            res.send(result);
+          .then((result) => {
+            res.redirect('/books');
             console.log(chalk.green('Book added successfully!'));
           })
           .catch((err: any) => {
@@ -81,12 +81,25 @@ const bookDelete: RequestHandler = (req, res) => {
 
   BookModel.findByIdAndDelete(id)
     .then((_) => {
-      res.json({ message: 'Deleted successfully!' });
+      res.json({ redirect: '/books', message: 'Deleted successfully!' });
     })
     .catch((err) => {
       console.log(err);
       res.json({ error: err });
     });
+};
+
+const rentBookForm: RequestHandler = (req, res) => {
+  const _id = req.params.id;
+
+  BookModel.findById(_id)
+    .then((result) => {
+      res.render('books/rentBookForm', {
+        title: 'Blog Details',
+        book: result,
+      });
+    })
+    .catch((err) => res.status(400).render('404', { title: 'Book Not Found' }));
 };
 
 const bookController = {
@@ -95,6 +108,7 @@ const bookController = {
   bookUpdate,
   bookDelete,
   bookForm,
+  rentBookForm,
 };
 
 export default bookController;

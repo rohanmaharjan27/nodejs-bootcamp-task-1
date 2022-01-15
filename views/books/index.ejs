@@ -1,5 +1,8 @@
 <html lang='en'>
     <%- include('../partials/header.ejs') %>
+    <script>
+
+    </script>
     <body>
        <%- include('../partials/nav.ejs') %>
        <h2 class="title"><%= title %></h2>
@@ -10,9 +13,9 @@
                         <img class="book_image" alt="book_image" src=http://localhost:4000/<%= book.image %> />
                         <h3 class="book_name"><%= book.name %></h3>
                         <p class="book_author"><%= book.author %></p>
-                        <button class="book_rent_btn">Rent</button>
-                        <button class="book_update_btn">Edit</button>
-                        <button class="book_delete_btn">Delete</button>
+                        <button class="book_rent_btn" data-doc='<%= book._id %>'>Rent</button>
+                        <button class="book_update_btn" data-doc='<%= book._id %>'>Edit</button>
+                        <button class="book_delete_btn" data-doc='<%= book._id %>'>Delete</a>
                 </div>
             <% }) %>
             <% } else {%>
@@ -21,5 +24,33 @@
         </div>
        </div>
        <%- include('../partials/footer.ejs') %>
+       <script>
+        const rentBook=document.querySelector('button.book_rent_btn');
+
+        console.log('rent',rentBook.dataset.doc)
+
+        rentBook.addEventListener('click',(e)=>{
+            const endpoint= `/books/book/${rentBook.dataset.doc}`
+        
+            fetch(endpoint,{method:"GET"})
+            .then(res=>window.location.href=res.url);
+            
+        });
+        </script>
+        <script>
+
+        const deleteBook=document.querySelector('button.book_delete_btn');
+
+        console.log('delete',deleteBook.dataset.doc);
+
+        deleteBook.addEventListener('click',(e)=>{
+            const endpoint= `/books/${deleteBook.dataset.doc}`
+        
+            fetch(endpoint,{method:"DELETE"})
+            .then((response)=>response.json())
+            .then((data)=>window.location.href=data.redirect)
+            .catch((err)=>console.log(err));
+        });                
+    </script>
     </body>
 </html>

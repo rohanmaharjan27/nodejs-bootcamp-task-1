@@ -13,4 +13,5 @@ export interface Record {
   rent_date: Date;
   return_date: Date;
   return_date_max: Date;
+  rented_book: Book;
 }
