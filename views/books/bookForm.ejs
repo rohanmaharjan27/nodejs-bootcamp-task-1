@@ -23,12 +23,37 @@
        </div>
        <%- include('../partials/footer.ejs') %>
 
-       <script>
-        const addBook=document.querySelector('button.book_rent_btn');
 
-        addBook.addEventListener('click',(e)=>{
-            window.location.href='/books'
-        });                
+    <script>
+        const createNewBook = async(body) => {
+        const settings = {  
+            method:'POST',
+            body:body,
+        }; 
+
+        try{ 
+            const response = await fetch('http://localhost:4000/books', settings) 
+            const res = await response.json(); 
+            console.log(res); 
+            
+            if (res.error_message){
+                alert(res.error_message)
+            }else{
+                alert(res.message);
+            }
+        } catch(error) { 
+            console.log(error);
+        }};  
+
+        const form = document.querySelector('form');
+
+        form.addEventListener('submit', (e) => {
+            const data =new FormData(form)
+            e.preventDefault();
+
+            createNewBook(data);
+        
+        });
     </script>
     </body>
 </html>

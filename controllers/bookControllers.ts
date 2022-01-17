@@ -37,7 +37,7 @@ const bookCreate: RequestHandler = (req, res) => {
         book
           .save()
           .then((result) => {
-            res.redirect('/books');
+            res.status(201).json({ message: 'Book added successfully!' });
             console.log(chalk.green('Book added successfully!'));
           })
           .catch((err: any) => {
