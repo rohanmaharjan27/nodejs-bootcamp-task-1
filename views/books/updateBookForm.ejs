@@ -1,0 +1,75 @@
+<html lang='en'>
+    <%- include('../partials/header.ejs') %>
+    <body>
+       <%- include('../partials/nav.ejs') %>
+       <h2 class="title"><%= title %></h2>
+       <div class="add_book_div">
+        <form enctype="multipart/form-data" method="put">
+            <label for="name">Book Name:</label>
+            <br/>
+            <input type="text" id="name" name="name" required value="<%= book.name %>"/>
+            <br/>
+            <label for="author">Book Author:</label>
+            <br/>
+            <input type="text" id="author" name="author" required value="<%= book.author %>"/>
+            <br/>
+            <button type="submit" id="book_update_btn" class="book_update_btn" data-doc='<%= book._id %>'>Update</button>
+            <a class="delete" data-doc="<%= book._id %>"><img src="/delete.svg" alt="Delete Book"/></a>
+         </form>
+        </div>
+       </div>
+       <%- include('../partials/footer.ejs') %>
+
+       <script>
+
+           const book=document.querySelector("button.book_update_btn")
+
+            const updateBook = async(body) => {
+                
+                            const settings = {  
+                                method:'PUT', 
+                                headers: {'Content-Type': 'application/json'},
+                                body:JSON.stringify(body),
+                            }; 
+
+                            try{ 
+                                const response = await fetch(`http://localhost:4000/books/${book.dataset.doc}`, settings) 
+                                const res = await response.json();
+                                                    
+                                if (res.error_message){
+                                    alert(res.error_message)
+                                }else{
+                                    alert(res.message);
+                                }
+                            } catch(error) { 
+                                console.log(error);
+            }};
+
+            const form = document.querySelector('form');
+
+            form.addEventListener('submit', (e) => {
+            const data = Object.fromEntries(new FormData(form).entries());
+
+            e.preventDefault();
+
+            updateBook(data);
+            });
+
+            
+        </script>
+
+        <script>
+            const deleteBook=document.querySelector('a.delete');
+
+            deleteBook.addEventListener('click',(e)=>{
+                const endpoint= `/books/${deleteBook.dataset.doc}`
+            
+                fetch(endpoint,{method:"DELETE"})
+                .then((response)=>response.json())
+                .then((data)=>window.location.href=data.redirect)
+                .catch((err)=>console.log(err));
+            });                
+        </script>
+
+    </body>
+</html>

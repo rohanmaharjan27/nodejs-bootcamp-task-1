@@ -1,0 +1,58 @@
+<html lang='en'>
+    <%- include('../partials/header.ejs') %>
+    <body>
+       <%- include('../partials/nav.ejs') %>
+       <h2 class="title"><%= title %></h2>
+       <div class="add_book_div">
+         <form enctype="multipart/form-data" action="/books" method="post">
+            <label for="name">Book Name:</label>
+            <br/>
+            <input type="text" id="name" name="name" required/>
+            <br/>
+            <label for="author">Book Author:</label>
+            <br/>
+            <input type="text" id="author" name="author" required/>
+            <br/>
+            <label for="image">Book Image:</label>
+            <br/>
+            <input type="file" id="image" name="image" required/>
+            <br/>
+            <button type="submit" class="book_rent_btn">Add</button>
+         </form>
+        </div>
+       </div>
+       <%- include('../partials/footer.ejs') %>
+
+
+    <script>
+        const createNewBook = async(body) => {
+        const settings = {  
+            method:'POST',
+            body:body,
+        }; 
+
+        try{ 
+            const response = await fetch('http://localhost:4000/books', settings) 
+            const res = await response.json(); 
+                        
+            if (res.error_message){
+                alert(res.error_message)
+            }else{
+                alert(res.message);
+            }
+        } catch(error) { 
+            console.log(error);
+        }};  
+
+        const form = document.querySelector('form');
+
+        form.addEventListener('submit', (e) => {
+            const data =new FormData(form)
+            e.preventDefault();
+
+            createNewBook(data);
+        
+        });
+    </script>
+    </body>
+</html>

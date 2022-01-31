@@ -1,0 +1,38 @@
+{
+  "name": "library-management-system",
+  "version": "1.0.0",
+  "description": "Library Management System",
+  "main": "app.ts",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rohanmaharjan27/nodejs-bootcamp-task-1.git"
+  },
+  "author": "Rohan Maharjan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rohanmaharjan27/nodejs-bootcamp-task-1/issues"
+  },
+  "homepage": "https://github.com/rohanmaharjan27/nodejs-bootcamp-task-1#readme",
+  "dependencies": {
+    "@types/ejs": "^3.1.0",
+    "@types/express": "^4.17.13",
+    "@types/morgan": "^1.9.3",
+    "@types/multer": "^1.4.7",
+    "body-parser": "^1.19.1",
+    "chalk": "^4.1.2",
+    "dotenv": "^11.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "moment": "^2.29.1",
+    "mongoose": "^6.1.6",
+    "multer": "^1.4.4",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  }
+}
