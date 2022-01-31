@@ -56,9 +56,11 @@ const bookCreate: RequestHandler = (req, res) => {
 const bookUpdate: RequestHandler = (req, res) => {
   const _id = req.params.id;
 
+  console.log(req.body)
+
   BookModel.findOneAndUpdate({ _id }, req.body, { new: true })
     .then((book) => {
-      if (book !== null) {
+      if (book!==null) {
         res.status(201).json({
           book,
           message: 'Book Updated Successfully!',
@@ -95,7 +97,20 @@ const rentBookForm: RequestHandler = (req, res) => {
   BookModel.findById(_id)
     .then((result) => {
       res.render('books/rentBookForm', {
-        title: 'Blog Details',
+        title: 'Book Details',
+        book: result,
+      });
+    })
+    .catch((err) => res.status(400).render('404', { title: 'Book Not Found' }));
+};
+
+const updateBookForm: RequestHandler = (req, res) => {
+  const _id = req.params.id;
+
+  BookModel.findById(_id)
+    .then((result) => {
+      res.render('books/updateBookForm', {
+        title: 'Book Details',
         book: result,
       });
     })
@@ -109,6 +124,7 @@ const bookController = {
   bookDelete,
   bookForm,
   rentBookForm,
+  updateBookForm,
 };
 
 export default bookController;

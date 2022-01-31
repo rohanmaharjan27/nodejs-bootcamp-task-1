@@ -133,6 +133,7 @@ textarea {
   border-radius: 4px;
   font-size: 16px;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .book_update_btn {
@@ -144,6 +145,7 @@ textarea {
   border-radius: 4px;
   font-size: 16px;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .book_delete_btn {
@@ -155,6 +157,7 @@ textarea {
   border-radius: 4px;
   font-size: 16px;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .add_book_div{
@@ -165,4 +168,8 @@ textarea {
 
 .add_book_div label,input{
   margin:10px 0px;
+}
+
+a{
+  cursor: pointer;
 }

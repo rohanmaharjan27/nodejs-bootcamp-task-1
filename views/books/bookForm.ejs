@@ -34,8 +34,7 @@
         try{ 
             const response = await fetch('http://localhost:4000/books', settings) 
             const res = await response.json(); 
-            console.log(res); 
-            
+                        
             if (res.error_message){
                 alert(res.error_message)
             }else{

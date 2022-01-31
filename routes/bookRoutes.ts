@@ -11,6 +11,7 @@ const {
   bookDelete,
   bookForm,
   rentBookForm,
+  updateBookForm,
 } = bookController;
 
 bookRouter.get('/', bookIndex);
@@ -19,5 +20,6 @@ bookRouter.post('/', bookUpload.single('image'), bookCreate);
 bookRouter.put('/:id', bookUpdate);
 bookRouter.delete('/:id', bookDelete);
 bookRouter.get('/book/:id', rentBookForm);
+bookRouter.get('/update-book/:id', updateBookForm);
 
 export default bookRouter;
